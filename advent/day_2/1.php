@@ -1,6 +1,6 @@
 <?php
 
-function test () { 
+function test () { #test code function
 
     $arr = [1,0,0,0,99];
     assert (code($arr) == [2,0,0,0,99]);
@@ -12,13 +12,13 @@ function test () {
     assert (code($arr) == [30,1,1,4,2,5,6,0,99]);
 }
 
-function code($prog) {
+function code($prog) { #iterate program array until opcode 99 is met
 
         $i = 0;
 
         do {
 
-            if ($prog[$i] == 1) {
+            if ($prog[$i] == 1) { 
 
                 $prog = sum($prog, $i);
 
@@ -37,14 +37,14 @@ function code($prog) {
 
 }
 
-function sum ($arr, $k) {
+function sum ($arr, $k) { #get $i from code function and sum the next two positions, third telling where to save the result
 
     $sum = $arr[$arr[$k+1]] + $arr[$arr[$k + 2]];
     $arr[$arr[$k + 3]] = $sum;
     return $arr;
 }
 
-function multi ($arr, $k) {
+function multi ($arr, $k) { #same as sum but it multiplies
 
     $mul = $arr[$arr[$k+1]] * $arr[$arr[$k + 2]];
     $arr[$arr[$k + 3]] = $mul;
@@ -52,28 +52,16 @@ function multi ($arr, $k) {
    
 }
 
-function main () {
+function main () { #get input and change values before running the code function
 
-    $myfile = fopen("input.txt", "r") or die("Unable to open file!");
+    $myfile = file_get_contents('input.txt', true) or die("Unable to open file!");
+    $inp = explode(",", $myfile); 
 
-    (int) $i = 0;
+    $inp [1] = 12;
+    $inp [2] = 2;
+    $inp = code($inp);
+    echo "<h1>" . $inp[0] . "<h1>";
 
-    while(!feof($myfile)) { #pitäisi lukea kunnes tulee pilkku
-
-        $line[$i] = fgetc($myfile);
-        $i++;
-
-      }
-
-    fclose($myfile);    
-    print_r($line);
-
-    /*
-    $line = $line [1] = 12;
-    $line = $line [2] = 2;
-    $line = code($myfile);
-    echo "<h1>" . $line[0] . "<h1>";
-    */
 }
 
 test();
