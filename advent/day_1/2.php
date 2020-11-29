@@ -38,7 +38,8 @@ function main () {
         }
 
     echo "<h1>" . $sum . "<h1>";
-
+    fclose($myfile);
+        
 }
 
 test();
